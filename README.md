@@ -26,6 +26,3 @@ dotnet user-secrets set "ConnectionStrings:GameStoreContext" "Server=localhost; 
 ```powershell
   dotnet ef database update
 ```
-
-
-heheheh

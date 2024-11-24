@@ -7,11 +7,11 @@ namespace API.Entities
         public int Id { get; set; }
 
         [Required]
-        [StringLength(10)]
+        [StringLength(40)]
         public required string Name { get; set; }
 
         [Required]
-        [StringLength(5)]
+        [StringLength(20)]
         public required string Genre { get; set; } 
 
         [Required]
@@ -20,7 +20,7 @@ namespace API.Entities
         public DateTime ReleaseDate { get; set; }
 
         [Url]
-        [StringLength(10)]
+        [StringLength(250)]
         public required string ImageUri { get; set; }
     }
 }

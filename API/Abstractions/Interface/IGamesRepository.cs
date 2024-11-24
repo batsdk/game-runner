@@ -5,8 +5,8 @@ namespace API.Abstractions.Interface
 {
     public interface IGamesRepository
     {
-        public IEnumerable<Game> GetAll();
-        public Game? Get(int Id);
-        public void Create(Game game);
+        Task<IEnumerable<Game>> GetAllAsync();
+        Task<Game?> GetAsync(int Id);
+        Task CreateAsync(Game game);
     }
 }

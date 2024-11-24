@@ -6,11 +6,11 @@ namespace API.Data
 {
     public static class DataExntentions
     {
-        public static void InitilizeDb(this IServiceProvider serviceProvider)
+        public async static Task InitializeDbAsync(this IServiceProvider serviceProvider)
         {
             using var scope = serviceProvider.CreateScope();
             var dbContext = scope.ServiceProvider.GetRequiredService<GameStoreContext>();
-            dbContext.Database.Migrate();
+            await dbContext.Database.MigrateAsync();
         }
 
         public static IServiceCollection AddRepositories(this IServiceCollection services, IConfiguration config)

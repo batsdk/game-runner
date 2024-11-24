@@ -15,32 +15,32 @@ namespace API.Repositories
             this.db = db;
         }
 
-        public void Create(Game game)
+        public async Task CreateAsync(Game game)
         {
             db.Games.Add(game);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
         }
 
-        public void Update(Game game)
+        public async Task Update(Game game)
         {
             db.Update(game);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
         }
 
-        public void Delete(int Id)
+        public async Task Delete(int Id)
         {
-            db.Games.Where(g => g.Id == Id)
-                .ExecuteDelete();
+            await db.Games.Where(g => g.Id == Id)
+                .ExecuteDeleteAsync();
         }
 
-        public Game? Get(int Id)
+        public async Task<Game?> GetAsync(int Id)
         {
-            return db.Games.Find(Id);
+            return await db.Games.FindAsync(Id);
         }
 
-        public IEnumerable<Game> GetAll()
+        public async Task<IEnumerable<Game>> GetAllAsync()
         {
-            return db.Games.AsNoTracking().ToList();
+            return await db.Games.AsNoTracking().ToListAsync();
         }
     }
 }

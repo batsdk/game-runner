@@ -1,9 +1,7 @@
 using API.Abstractions.Interface;
 using API.DTO;
 using API.Entities;
-using API.Repositories;
 using Microsoft.AspNetCore.Mvc;
-
 
 namespace API.Controllers
 {
@@ -23,22 +21,22 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public List<GameDto> GetAllGames()
+        public async Task<List<GameDto>> GetAllGames()
         {
-            return _repo.GetAll().Select(game => game.AsDto()).ToList();
+            return (await _repo.GetAllAsync()).Select(game => game.AsDto()).ToList();
         }
 
         [HttpGet("{id}", Name = GetGameEndpoint)]
-        public IActionResult GetSingleGame(int id)
+        public async Task<IActionResult> GetSingleGame(int id)
         {
-            Game? game = _repo.Get(id);
+            Game? game = await _repo.GetAsync(id);
             return game is not null ? Ok(game.AsDto( )) : NotFound();
         }
 
         [HttpPost("games")]
         public IActionResult AddGame(Game game)
         {
-            _repo.Create(game);
+            _repo.CreateAsync(game);
 
             return CreatedAtRoute(GetGameEndpoint, new { id = game.Id }, game);
         }
